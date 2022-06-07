@@ -34,7 +34,7 @@ installBashGitPrompt() {
     local bashrc="${HOME}/.bashrc"
     local git="https://github.com/magicmonty/bash-git-prompt.git"
     local header="# BASH-GIT-PROMPT CONFIGURATION"
-    local script="scripts/bash-git-prompt.bashrc"
+    local script="scripts/bash-git-prompt.script"
 
     if isDirectory ${target} ; then
 	echo "${program}: already exists at ${target}"
