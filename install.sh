@@ -40,7 +40,7 @@ installBashGitPrompt() {
     local origin="https://github.com/magicmonty/bash-git-prompt.git"
     local target="${HOME}/.${program}"
     local config="${HOME}/.bashrc"
-    local marker="# BASH-GIT-PROMPT CONFIGURATION"
+    local marker="BASH-GIT-PROMPT_CONFIGURATION"
     local script="${PWD}/scripts/bash-git-prompt.script"
 
     if isDirectory ${target} ; then
@@ -64,7 +64,7 @@ setupEmacs() {
     local origin="https://raw.githubusercontent.com/google/styleguide/gh-pages/google-c-style.el"
     local target="${HOME}/.emacs.d/google/${program}"
     local config="${HOME}/.emacs"
-    local marker="; EMACS CONFIGURATION"
+    local marker="EMACS_CONFIGURATION"
     local script="${PWD}/scripts/emacs.script"
 
     if isDirectory ${target} ; then
