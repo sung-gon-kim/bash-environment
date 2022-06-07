@@ -1,8 +1,15 @@
 #!/bin/bash
 
+PWD=$(dirname $0)
+
 # Check if a directory exists.
 isDirectory() {
     [[ -d $1 ]];
+}
+
+# Check if a file exists.
+isFile() {
+    [[ -f $1 ]];
 }
 
 # Check if a string exists in the given file.
@@ -30,27 +37,53 @@ installPackages() {
 # Install bash-git-prompt
 installBashGitPrompt() {
     local program="bash-git-prompt"
+    local origin="https://github.com/magicmonty/bash-git-prompt.git"
     local target="${HOME}/.${program}"
-    local bashrc="${HOME}/.bashrc"
-    local git="https://github.com/magicmonty/bash-git-prompt.git"
-    local header="# BASH-GIT-PROMPT CONFIGURATION"
-    local script="scripts/bash-git-prompt.script"
+    local config="${HOME}/.bashrc"
+    local marker="# BASH-GIT-PROMPT CONFIGURATION"
+    local script="${PWD}/scripts/bash-git-prompt.script"
 
     if isDirectory ${target} ; then
 	echo "${program}: already exists at ${target}"
     else
-	git clone ${git} ${target}
+	git clone ${origin} ${target}
 	echo "${program}: downloaded at ${target}"
     fi
 
-    if contains ${bashrc} ${header} ; then
+    if contains ${config} ${marker} ; then
 	echo "${program}: already configured"
     else
-	cat ${script} >> ${bashrc}
+	cat ${script} >> ${config}
 	echo "${program}: configured"
+    fi
+}
+
+# Setup emacs
+setupEmacs() {
+    local program="google-c-style.el"
+    local origin="https://raw.githubusercontent.com/google/styleguide/gh-pages/google-c-style.el"
+    local target="${HOME}/.emacs.d/google/${program}"
+    local config="${HOME}/.emacs"
+    local marker="; EMACS CONFIGURATION"
+    local script="${PWD}/scripts/emacs.script"
+
+    if isDirectory ${target} ; then
+	echo "${program}: already exists at ${target}"
+    else
+	mkdir -p $(dirname ${target})
+	wget ${origin} -O ${target}
+	echo "${program}: downloaded at ${target}"
+    fi
+
+    if contains ${config} ${marker} ; then
+	echo "${program}: already configured"
+    else
+	cat ${script} >> ${config}
+	echo "${program} configured"
     fi
 }
 
 # Main
 installPackages
 installBashGitPrompt
+setupEmacs

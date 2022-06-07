@@ -1,0 +1,16 @@
+
+; EMACS CONFIGURATION
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+
+(load-file "~/.emacs.d/google/google-c-style.el")
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
+(setq make-backup-files nil)
+
+(setq indent-tabs-mode nil)
+
+(add-hook 'write-file-hooks 'delete-trailing-whitespace)
+
+(global-linum-mode t)
