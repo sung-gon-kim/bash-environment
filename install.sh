@@ -23,7 +23,7 @@ contains() {
 installPackages() {
     sudo apt-get update
     sudo apt-get upgrade -y
-    sudo apt-get install \
+    sudo apt-get install -y \
 	 ack-grep \
 	 build-essential \
 	 cmake \
